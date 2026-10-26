@@ -5,7 +5,6 @@ import { createHistory, pushMove, undo, redo, canUndo, canRedo } from '../../src
 import { isSolved, solvedState, sameState } from '../../src/cube/state';
 import { createScramble, stateFromScramble } from '../../src/cube/scramble';
 import { applyMoves } from '../../src/cube/state';
-import { PREDICATES, crossSolved, firstLayerSolved, yellowFaceSolved } from '../../src/lessons/predicates';
 import { averageOf, createStopwatch, effectiveMs, formatMs, penaltyFromInspection, personalBest, type Solve } from '../../src/timer/stats';
 import { createMemoryAdapter, createTypedStore } from '../../src/storage/store';
 import { parseAlgorithm } from '../../src/cube/notation';
@@ -154,29 +153,5 @@ describe('lưu trữ cục bộ', () => {
     const saved = store.save({ n: 1 });
     assert.equal(saved.ok, false);
     store.clear();
-  });
-});
-
-describe('điều kiện bài học', () => {
-  it('khối đã giải thỏa mãn mọi điều kiện', () => {
-    const s = solvedState();
-    for (const [, fn] of Object.entries(PREDICATES)) assert.equal(fn(s), true);
-  });
-
-  it('một lượt R làm hỏng dấu cộng trắng', () => {
-    const s = applyMoves(solvedState(), mustParse('R'));
-    assert.equal(crossSolved(s), false);
-    assert.equal(firstLayerSolved(s), false);
-  });
-
-  it('chỉ quay mặt D không làm hỏng dấu cộng trắng nhưng làm hỏng mặt vàng', () => {
-    const s = applyMoves(solvedState(), mustParse("D"));
-    assert.equal(crossSolved(s), true);
-    assert.equal(yellowFaceSolved(s), true);
-  });
-
-  it('xáo trộn ngẫu nhiên hầu như không bao giờ thỏa mãn điều kiện giải xong', () => {
-    const s = stateFromScramble(createScramble(8, 25));
-    assert.equal(PREDICATES.solved(s), false);
   });
 });

@@ -125,7 +125,7 @@ describe('kiểm tra tính hợp lệ của trạng thái', () => {
   it('một sticker bị đổi màu làm sai số lượng màu', () => {
     const s = solvedState();
     const stickers = s.stickers.slice();
-    stickers[0] = 'Y';
+    stickers[0] = 'R';
     const result = analyzeState({ stickers });
     assert.equal(result.valid, false);
     assert.ok(result.errors.some((e) => e.includes('phải đúng 9 lần')));

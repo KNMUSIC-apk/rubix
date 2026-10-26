@@ -10,7 +10,7 @@ export type Vec3 = readonly [number, number, number];
 
 export type FaceName = 'U' | 'R' | 'F' | 'D' | 'L' | 'B';
 
-/** Màu sticker. Quy ước chuẩn: U trắng, F xanh lá, R đỏ, D vàng, L cam, B xanh dương. */
+/** Màu sticker. Quy ước học tập: D trắng (lớp đầu ở dưới), U vàng, F xanh lá, R đỏ, L cam, B xanh dương. */
 export type Color = 'W' | 'Y' | 'G' | 'B' | 'R' | 'O';
 
 export interface Sticker {
@@ -31,10 +31,10 @@ export const FACE_NORMAL: Readonly<Record<FaceName, Vec3>> = {
 
 /** Màu của tâm mỗi mặt khi khối đã giải. */
 export const SOLVED_FACE_COLOR: Readonly<Record<FaceName, Color>> = {
-  U: 'W',
+  U: 'Y',
   R: 'R',
   F: 'G',
-  D: 'Y',
+  D: 'W',
   L: 'O',
   B: 'B',
 };
